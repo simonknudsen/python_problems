@@ -10,6 +10,8 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(4, s.candy([1, 2, 2]))
         self.assertEqual(7, s.candy([1, 3, 2, 2, 1]))
         self.assertEqual(13, s.candy([1, 2, 87, 87, 87, 2, 1]))
+        self.assertEqual(9, s.candy([4, 3, 3, 2, 1]))
+
 
 
         #self.assertEqual(True, False)  # add assertion here
