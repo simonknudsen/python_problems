@@ -5,30 +5,23 @@ class Solution:
         if not height or len(height) == 1:
             return 0
         max_area = 0
-        #for i in range(len(height)):
-        #    for j in range(len(height)):
-        #        x = abs(i-j)
-        #        y = min(height[i],height[j])
-        #        if x * y > max_area:
-        #            max_area = x * y
-
-        #height_idx = sorted([(i, height[i]) for i in range(len(height))], key = lambda x, y : y)
-        height_idx = sorted([(i, height[i]) for i in range(len(height))], key = lambda x: x[1])
-        print(height_idx)
-
-        for i in range(len(height_idx)):
-            x = height_idx[i]
-            index = x[0]
-            area = max([abs(index - j[0]) for j in height_idx[i::]]) * x[1]
-            print(f"x={x} area={area}")
+        best_left = (0, height[0])
+        best_right = (len(height)-1, height[len(height)-1])
+        max_i = len(height) - 1
+        area = min(best_left[1], best_right[1]) * abs(best_right[0] - best_left[0])
+        for i in range(min(((len(height) // 2) + 2),len(height))):
+            print(f"best_left={best_left} best_right={best_right} area={area} i={i}")
+            #if height[i] - best_left[1] >= i - best_left[0]:
+            #    best_left = (i, height[i])
+            #elif height[i] - best_right[1] >= best_right[0] - i:
+            #    best_right = (i, height[i])
+            if min(height[i],best_right[1]) * abs(best_right[0] - i) >= area:
+                best_left = (i, height[i])
+            area = min(best_left[1], best_right[1]) * abs(best_right[0] - best_left[0])
+            if min(best_left[1],height[max_i-i]) * abs(max_i - i - best_left[0]) >= area:
+                best_right = (max_i - i, height[max_i - i])
+            area = min(best_left[1],best_right[1]) * abs(best_right[0] - best_left[0])
             if area > max_area:
                 max_area = area
-
-        #for i in range(len(height)):
-        #    dists = [abs(x - i) for x in range(len(height))]
-        #    heights = [min(height[i],height[x]) for x in range(len(height))]
-        #    areas = [dists[x] * heights[x] for x in range(len(height))]
-        #    if max(areas) > max_area:
-        #        max_area = max(areas)
         return max_area
 
