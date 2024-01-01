@@ -1,5 +1,5 @@
 from typing import List
-
+from statistics import mean
 class Solution:
     def maxArea(self, height: List[int]) -> int:
         if not height or len(height) == 1:
@@ -9,11 +9,20 @@ class Solution:
         best_right = (len(height)-1, height[len(height)-1])
         area = min(best_left[1], best_right[1]) * abs(best_right[0] - best_left[0])
         iter = 0
-        for i in range(len(height) - 1):
-            print(f"i={i}")
-            for j in range(best_right[0], i, -1):
+        rating = []
+        for i in range(len(height)):
+            j = len(height) - i
+            rating.append(height[i] * (len(height) - min(i + 1, j))/2)
+        print(f"rating={rating}")
+        top_rating = sorted(sorted(range(len(rating)), key=lambda i: rating[i])[-10:])
+
+        for i in [x for x in range(len(height) - 1) if x in top_rating]:
+            #print(f"i={[x for x in range(len(height) - 1) if rating[x] >= 1]}")
+            #print(f"i={i}")
+            #print(f"j={[x for x in range(best_right[0], i, -1) if rating[x] >= 1]}")
+            for j in [x for x in range(best_right[0], i, -1) if x in top_rating]:
                 iter += 1
-                print(f"i area={min(height[i],best_right[1]) * abs(best_right[0] - i)}")
+                #print(f"i area={min(height[i],best_right[1]) * abs(best_right[0] - i)}")
 
                 if min(height[i],height[j]) * abs(j - i) >= area and height[i] and height[j]:
                     best_left = (i, height[i])
@@ -21,7 +30,7 @@ class Solution:
                 area = min(best_left[1],best_right[1]) * abs(best_right[0] - best_left[0])
                 if area > max_area:
                     max_area = area
-                print(f"best_left={best_left} best_right={best_right} area={area} i={i} j={j}")
+                #print(f"best_left={best_left} best_right={best_right} area={area} i={i} j={j}")
         print(f"iter={iter}")
         return max_area
 
