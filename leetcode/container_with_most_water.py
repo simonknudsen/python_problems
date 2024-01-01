@@ -5,6 +5,34 @@ class Solution:
         if not height or len(height) == 1:
             return 0
         max_area = 0
+        last_occur_idx_by_height = {}
+        first_occur_idx_by_height = {}
+        last_height = 0
+        for i in range(len(height) - 1, -1, -1):
+            if height[i] > last_height:
+                for h in range(last_height + 1, height[i] + 1):
+                    last_occur_idx_by_height[h] = i
+                last_height = height[i]
+        last_height = 0
+        for i in range(0, len(height)):
+            if height[i] > last_height:
+                for h in range(last_height + 1, height[i] + 1):
+                    first_occur_idx_by_height[h] = i
+                last_height = height[i]
+        print(f"first_occur_idx_by_height={first_occur_idx_by_height}")
+        print(f"last_occur_idx_by_height={last_occur_idx_by_height}")
+
+        heights = first_occur_idx_by_height.keys()
+        for h in heights:
+            area = (last_occur_idx_by_height[h] - first_occur_idx_by_height[h]) * h
+            if area > max_area:
+                max_area = area
+        return max_area
+
+    def maxAreaLessOld(self, height: List[int]) -> int:
+        if not height or len(height) == 1:
+            return 0
+        max_area = 0
         best_left = (0, height[0])
         best_right = (len(height)-1, height[len(height)-1])
         area = min(best_left[1], best_right[1]) * abs(best_right[0] - best_left[0])
