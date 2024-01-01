@@ -7,20 +7,17 @@ class Solution:
         return sorted(t) == sorted("".join(h["collected"]))
 
     def minWindow(self, s: str, t: str) -> str:
-        #chars = {}
         in_progress = []
         best = None
-        #for i in range(len(s)):
-        #    c = s[i]
-        #    if chars[c]:
-        #        chars[c].append(i)
-        #    else:
-        #        chars[c] = [i]
+        all_chars = list(set(t))
         for i in range(len(s)):
-            print(f"best={best} in_progress={in_progress}")
+            #print(f"best={best} in_progress={in_progress}")
             c = s[i]
-            if c in t:
+            if c in all_chars:
+                new = {"start": i, "chars": list(t)}
+                in_progress.append(new)
                 in_progress2 = in_progress.copy()
+
                 for p in in_progress:
                     if p["chars"].count(c) > 0:
                         p["chars"].remove(c)
@@ -31,10 +28,15 @@ class Solution:
                         elif p["end"] - p["start"] < best["end"] - best["start"]:
                             best = p
                         in_progress2.remove(p)
-                new = {"start": i, "chars": list(t)}
-                new["chars"].remove(c)
-                in_progress2.append(new)
+                    # remove too long
+                    if best and p["start"] < best["start"]:
+                        in_progress2.remove(p)
+                    # remove not enough chars left
+                    if len(p["chars"]) > len(s) - i:
+                        in_progress2.remove(p)
                 in_progress = in_progress2
+        #print(f"best={best} in_progress={in_progress}")
+        print(f"best={best}")
         if best:
             return s[best["start"]:best["end"] + 1]
         return ""
