@@ -49,6 +49,20 @@ def python_time_delta(t1, t2):
     return diff_in_dates_in_secs(python_time_delta_parse_date(t1), python_time_delta_parse_date(t2))
     #print(f"hours1={hours1} mins1={mins1} hours2={hours2} mins2={mins2}")
 
+# https://www.hackerrank.com/challenges/most-commons/problem?isFullScreen=true
+def most_commons(s):
+    c_count = {}
+    for c in s:
+        if not c_count.get(c):
+            c_count[c] = 1
+        else:
+            c_count[c] += 1
+    chars = [(v, k) for k, v in c_count.items()]
+    chars.sort(key=lambda x: (0 - x[0]) * 1000 + ord(x[1]))
+    for x in chars[:3:]:
+        print(f"{x[1]} {x[0]}")
+
 if __name__ == '__main__':
-    print(python_time_delta("Sun 10 May 2015 13:54:36 -0700", "Sun 10 May 2015 13:54:36 -0000"))
-    print(python_time_delta("Sat 02 May 2015 19:54:36 +0530", "Fri 01 May 2015 13:54:36 -0000"))
+    #print(python_time_delta("Sun 10 May 2015 13:54:36 -0700", "Sun 10 May 2015 13:54:36 -0000"))
+    #print(python_time_delta("Sat 02 May 2015 19:54:36 +0530", "Fri 01 May 2015 13:54:36 -0000"))
+    most_commons("aabbbccde")
