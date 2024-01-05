@@ -96,8 +96,8 @@ def python_string_formatting(n):
 # https://www.hackerrank.com/challenges/the-minion-game/problem?isFullScreen=true
 def minion_game(s):
     vowels = {"A":1, "E":1, "I":1, "O":1, "U":1}
-    def get_match_from_sub(s):
-        return [s[0:i:] for i in range(1,len(s) + 1)]
+    #def get_match_from_sub(s):
+    #    return [s[0:i:] for i in range(1,len(s) + 1)]
     def get_matches(s, start_vowel):
         indexes = []
         for i, c in enumerate(s):
@@ -105,10 +105,11 @@ def minion_game(s):
                 indexes.append(i)
             if not start_vowel and not vowels.get(c):
                 indexes.append(i)
-        subs = []
+        #subs = []
+        subs_count = 0
         for i in indexes:
-            subs += get_match_from_sub(s[i::])
-        return len(subs)
+            subs_count += len(s[i::])
+        return subs_count
     vowel_count = get_matches(s, True)
     non_vowel_count = get_matches(s, False)
     if vowel_count > non_vowel_count:
