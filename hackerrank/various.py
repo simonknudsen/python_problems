@@ -118,30 +118,48 @@ def minion_game(s):
 # https://www.hackerrank.com/challenges/py-collections-namedtuple/problem?isFullScreen=true
 def py_collections_namedtuple(lines):
     i = lines[0].split().index("MARKS")
-    #Score = namedtuple('Score', lines[0])
     return f"{mean([int(x.split()[i]) for x in lines[1::]]):.2f}"
+
+# https://www.hackerrank.com/challenges/iterables-and-iterators/problem?isFullScreen=true
+def iterables_and_iterators(letters_str, k):
+    letters = letters_str.strip().split()
+    a_indexes = {}
+    for i, c in enumerate(letters):
+        if c == "a":
+            a_indexes[i:"a"]
+
+# https://www.hackerrank.com/challenges/designer-door-mat/problem?isFullScreen=true
+def designer_door_mat(n,m):
+    for i in range(1, n + 1):
+        j = min(i, n + 1 - i)
+        if i == n // 2 + 1:
+            pad = "-" * ((m - 7) // 2)
+            print(pad + "WELCOME" + pad)
+        else:
+            gates = "|.." * (j - 1)
+            line = "-" * ((m - 1) // 2 - len(gates) - 1)
+            half = line  + "." + gates
+            print(half + "|" + half[::-1])
+
+# https://www.hackerrank.com/challenges/alphabet-rangoli/problem
+def alphabet_rangoli(n):
+    height = n * 2 -1
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    letters = list(reversed(alphabet[0:n]))
+    for i in range(1, height + 1):
+        j = min(i, height + 1 - i)
+        dash = "-" * ((n - j) * 2)
+        letter = letters[j-1]
+        seq = ""
+        if j > 1:
+            seq = "-".join([x for x in letters[0:j-1]]) + "-"
+        print(dash + seq + letter + seq[::-1] + dash)
 
 if __name__ == '__main__':
     #print(python_time_delta("Sun 10 May 2015 13:54:36 -0700", "Sun 10 May 2015 13:54:36 -0000"))
     #print(python_time_delta("Sat 02 May 2015 19:54:36 +0530", "Fri 01 May 2015 13:54:36 -0000"))
     #most_commons("aabbbccde")
     #python_string_formatting(2)
-    print(py_collections_namedtuple([
-        "ID         MARKS      NAME       CLASS",
-        "1          97         Raymond    7",
-        "2          50         Steven     4",
-        "3          91         Adrian     9",
-        "4          72         Stewart    5",
-        "5          80         Peter      6"
-    ]))
-    print(py_collections_namedtuple([
-        "MARKS      CLASS      NAME       ID",
-        "92         2          Calum      1",
-        "82         5          Scott      2",
-        "94         2          Jason      3",
-        "55         8          Glenn      4",
-        "82         2          Fergus     5"
-    ]))
-
-
-    # Stuart 7501500
+    #designer_door_mat(7,21)
+    #designer_door_mat(9, 27)
+    alphabet_rangoli(5)
