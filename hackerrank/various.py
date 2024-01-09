@@ -155,6 +155,19 @@ def alphabet_rangoli(n):
             seq = "-".join([x for x in letters[0:j-1]]) + "-"
         print(dash + seq + letter + seq[::-1] + dash)
 
+# https://www.hackerrank.com/challenges/maximize-it/problem?isFullScreen=true
+def maximize_it(k,lines):
+    nums = []
+    for l in lines:
+        nums.append(map(int, l.strip().split()))
+    print(nums)
+    nums = [sorted([x**2 % k for x in y],reverse=True) for y in nums]
+    print(nums)
+    indexes = [0] * len(nums)
+    max_v = 0
+    #while True:
+    #    val = [nums[for i in range(len(nums))]
+
 if __name__ == '__main__':
     #print(python_time_delta("Sun 10 May 2015 13:54:36 -0700", "Sun 10 May 2015 13:54:36 -0000"))
     #print(python_time_delta("Sat 02 May 2015 19:54:36 +0530", "Fri 01 May 2015 13:54:36 -0000"))
@@ -162,4 +175,18 @@ if __name__ == '__main__':
     #python_string_formatting(2)
     #designer_door_mat(7,21)
     #designer_door_mat(9, 27)
-    alphabet_rangoli(5)
+    #alphabet_rangoli(5)
+    maximize_it(1000, ["2 5 4",
+                            "3 7 8 9",
+                            "5 5 7 8 9 10"])
+"""
+3 1000
+2 5 4
+3 7 8 9 
+5 5 7 8 9 10
+
+["2 5 4", 
+"3 7 8 9", 
+"5 5 7 8 9 10"]
+
+"""
