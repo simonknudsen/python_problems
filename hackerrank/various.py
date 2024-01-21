@@ -180,6 +180,16 @@ def fiboccai(n):
     else:
         return 23 * n
 
+def the_captains_room(k, room_entries):
+    found = []
+    all_rooms = list(set(room_entries))
+    for x in room_entries:
+        if x in found:
+            all_rooms.remove(x)
+        else:
+            found.append(x)
+    return all_rooms.pop()
+
 
 if __name__ == '__main__':
     #print(python_time_delta("Sun 10 May 2015 13:54:36 -0700", "Sun 10 May 2015 13:54:36 -0000"))
@@ -189,9 +199,13 @@ if __name__ == '__main__':
     #designer_door_mat(7,21)
     #designer_door_mat(9, 27)
     #alphabet_rangoli(5)
-    maximize_it(1000, ["2 5 4",
-                            "3 7 8 9",
-                            "5 5 7 8 9 10"])
+    #maximize_it(1000, ["2 5 4",
+    #                        "3 7 8 9",
+   #                         "5 5 7 8 9 10"])
+    with open("../data/the_captains_room.txt") as f:
+        room_entries = map(int, f.readline().split())
+        print(the_captains_room(5, room_entries))
+        // 4390
 """
 3 1000
 2 5 4
