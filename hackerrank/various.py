@@ -181,14 +181,29 @@ def fiboccai(n):
         return 23 * n
 
 def the_captains_room(k, room_entries):
-    found = []
-    all_rooms = list(set(room_entries))
+    #found = []
+    #all_rooms = list(set(room_entries))
+    potential_rooms = set()
+    room_count = {}
     for x in room_entries:
-        if x in found:
-            all_rooms.remove(x)
+        if room_count.get(x):
+            room_count[x] += 1
+            if room_count[x] == 2:
+                potential_rooms.remove(x)
         else:
-            found.append(x)
-    return all_rooms.pop()
+            room_count[x] = 1
+            potential_rooms.add(x)
+
+        #if captains_room == x:
+        #    captains_room = None
+        #    other_rooms[x] = 1
+        #elif captains_room is None and not other_rooms.get(x):
+        #    captains_room = x
+        #if x in found:
+        #    all_rooms.remove(x)
+        #else:
+        #    found.append(x)
+    return potential_rooms.pop()  #captains_room #all_rooms.pop()
 
 
 if __name__ == '__main__':
@@ -202,10 +217,15 @@ if __name__ == '__main__':
     #maximize_it(1000, ["2 5 4",
     #                        "3 7 8 9",
    #                         "5 5 7 8 9 10"])
+    """
+    5
+[1, 2, 3, 6, 5, 4, 4, 2, 5, 3, 6, 1, 6, 5, 3, 2, 4, 1, 2, 5, 1, 4, 3, 6, 8, 4, 3, 1, 5, 6, 2]
+    """
+    print(the_captains_room(5, [1, 2, 3, 6, 5, 4, 4, 2, 5, 3, 6, 1, 6, 5, 3, 2, 4, 1, 2, 5, 1, 4, 3, 6, 8, 4, 3, 1, 5, 6, 2]))
     with open("../data/the_captains_room.txt") as f:
         room_entries = map(int, f.readline().split())
         print(the_captains_room(5, room_entries))
-        // 4390
+        # 4390
 """
 3 1000
 2 5 4
