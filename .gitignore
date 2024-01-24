@@ -1,4 +1,6 @@
 **/__pycache__
+**/*.log
+**/*.txt
 */.idea
 .idea/**
 .idea

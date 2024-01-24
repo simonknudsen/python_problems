@@ -181,8 +181,6 @@ def fiboccai(n):
         return 23 * n
 
 def the_captains_room(k, room_entries):
-    #found = []
-    #all_rooms = list(set(room_entries))
     potential_rooms = set()
     room_count = {}
     for x in room_entries:
@@ -193,17 +191,7 @@ def the_captains_room(k, room_entries):
         else:
             room_count[x] = 1
             potential_rooms.add(x)
-
-        #if captains_room == x:
-        #    captains_room = None
-        #    other_rooms[x] = 1
-        #elif captains_room is None and not other_rooms.get(x):
-        #    captains_room = x
-        #if x in found:
-        #    all_rooms.remove(x)
-        #else:
-        #    found.append(x)
-    return potential_rooms.pop()  #captains_room #all_rooms.pop()
+    return potential_rooms.pop()
 
 
 if __name__ == '__main__':
