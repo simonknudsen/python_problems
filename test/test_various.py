@@ -39,3 +39,17 @@ def test_minion_game():
 def test_py_collections_namedtuple():
     assert "78.00" == various.py_collections_namedtuple(COLL_1)
     assert "81.00" == various.py_collections_namedtuple(COLL_2)
+
+def test_validating_uid():
+    print("****")
+    with open("../data/validating_uid_input.txt") as i:
+        with open("../data/validating_uid_answers.txt") as a:
+            input = [x.strip() for x in i.readlines()]
+            ans = [x.strip() for x in a.readlines()]
+            for j in range(90):
+                if various.validating_uid(input[j]) != ans[j]:
+                    print(f"j={j} input={input[j]} ans={ans[j]} my ans={various.validating_uid(input[j])}")
+
+            #for _ in range(90):
+             #   i.re
+            print(type(input))

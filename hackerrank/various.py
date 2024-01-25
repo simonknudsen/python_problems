@@ -193,6 +193,15 @@ def the_captains_room(k, room_entries):
             potential_rooms.add(x)
     return potential_rooms.pop()
 
+# https://www.hackerrank.com/challenges/validating-uid/problem?isFullScreen=true
+import re
+PATTERN = r"^(?=(?:.*[A-Z]){2})[a-zA-Z0-9]{10}$"
+def validating_uid(s):
+    if re.search(PATTERN, s) and len(s) == len(set(s)):
+        return "Valid"
+    else:
+        return "Invalid"
+
 
 if __name__ == '__main__':
     #print(python_time_delta("Sun 10 May 2015 13:54:36 -0700", "Sun 10 May 2015 13:54:36 -0000"))
